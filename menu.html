@@ -13,6 +13,8 @@ margin:0;
 background:#f3fff6;
 }
 
+/* NAVBAR */
+
 nav{
 background:#17a673;
 padding:12px;
@@ -27,11 +29,29 @@ text-decoration:none;
 font-weight:bold;
 }
 
+/* HERO BACKGROUND */
+
+.hero{
+background:url("https://images.unsplash.com/photo-1625944525533-473f1c4f7c44") center/cover;
+height:200px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:28px;
+font-weight:bold;
+text-shadow:0 2px 5px rgba(0,0,0,0.5);
+}
+
+/* CONTAINER */
+
 .container{
 max-width:900px;
 margin:auto;
 padding:20px;
 }
+
+/* MENU GRID */
 
 .menu{
 display:grid;
@@ -39,9 +59,11 @@ grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
 gap:15px;
 }
 
+/* CARD PRODUK */
+
 .card{
 background:white;
-padding:20px;
+padding:15px;
 border-radius:10px;
 text-align:center;
 box-shadow:0 2px 8px rgba(0,0,0,0.1);
@@ -51,6 +73,16 @@ transition:0.2s;
 .card:hover{
 transform:scale(1.03);
 }
+
+.card img{
+width:100%;
+height:140px;
+object-fit:cover;
+border-radius:8px;
+margin-bottom:10px;
+}
+
+/* BUTTON */
 
 button{
 background:#17a673;
@@ -63,7 +95,7 @@ margin-top:10px;
 font-weight:bold;
 }
 
-/* NOTIFIKASI PROFESIONAL */
+/* NOTIFIKASI */
 
 #notif{
 position:fixed;
@@ -97,6 +129,10 @@ transform:translateY(0);
 <a href="lokasi.html">Lokasi</a>
 </nav>
 
+<div class="hero">
+Menu Esteler Yummy
+</div>
+
 <div class="container">
 
 <h2>Menu Produk</h2>
@@ -104,16 +140,19 @@ transform:translateY(0);
 <div class="menu">
 
 <div class="card">
+<img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb">
 <h3>Es Teler Yummy</h3>
 <button onclick="tambah('Es Teler Yummy')">+ Tambah</button>
 </div>
 
 <div class="card">
+<img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b">
 <h3>Es Coklat</h3>
 <button onclick="tambah('Es Coklat')">+ Tambah</button>
 </div>
 
 <div class="card">
+<img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec">
 <h3>Rokupang</h3>
 <button onclick="tambah('Rokupang')">+ Tambah</button>
 </div>
@@ -122,7 +161,6 @@ transform:translateY(0);
 
 </div>
 
-<!-- NOTIFIKASI -->
 <div id="notif">✔ Produk sudah masuk ke keranjang</div>
 
 <script>
@@ -160,5 +198,4 @@ n.classList.remove("show");
 </script>
 
 </body>
-</html></body>
 </html>

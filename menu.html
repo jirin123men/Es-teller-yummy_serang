@@ -45,6 +45,11 @@ padding:20px;
 border-radius:10px;
 text-align:center;
 box-shadow:0 2px 8px rgba(0,0,0,0.1);
+transition:0.2s;
+}
+
+.card:hover{
+transform:scale(1.03);
 }
 
 button{
@@ -55,22 +60,29 @@ padding:10px 15px;
 border-radius:6px;
 cursor:pointer;
 margin-top:10px;
+font-weight:bold;
 }
 
-#toast{
-visibility:hidden;
+/* NOTIFIKASI PROFESIONAL */
+
+#notif{
+position:fixed;
+bottom:25px;
+right:25px;
 background:#17a673;
 color:white;
-padding:12px;
-border-radius:6px;
-position:fixed;
-bottom:30px;
-left:50%;
-transform:translateX(-50%);
+padding:14px 18px;
+border-radius:8px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+opacity:0;
+transform:translateY(20px);
+transition:0.3s;
+font-size:14px;
 }
 
-#toast.show{
-visibility:visible;
+#notif.show{
+opacity:1;
+transform:translateY(0);
 }
 
 </style>
@@ -110,7 +122,8 @@ visibility:visible;
 
 </div>
 
-<div id="toast">Produk ditambahkan ke keranjang</div>
+<!-- NOTIFIKASI -->
+<div id="notif">✔ Produk sudah masuk ke keranjang</div>
 
 <script>
 
@@ -128,18 +141,18 @@ keranjang.push({nama:nama,jumlah:1});
 
 localStorage.setItem("keranjang",JSON.stringify(keranjang));
 
-showToast();
+notif();
 
 }
 
-function showToast(){
+function notif(){
 
-let toast=document.getElementById("toast");
+let n = document.getElementById("notif");
 
-toast.className="show";
+n.classList.add("show");
 
 setTimeout(function(){
-toast.className=toast.className.replace("show","");
+n.classList.remove("show");
 },2000);
 
 }
@@ -147,34 +160,5 @@ toast.className=toast.className.replace("show","");
 </script>
 
 </body>
-</html>
-</div>
-
-<script>
-
-function tambah(nama,jumlah){
-
-let keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
-
-let index = keranjang.findIndex(p => p.nama === nama);
-
-if(index !== -1){
-
-keranjang[index].jumlah += jumlah;
-
-}else{
-
-keranjang.push({nama:nama,jumlah:jumlah});
-
-}
-
-localStorage.setItem("keranjang",JSON.stringify(keranjang));
-
-alert("Produk ditambahkan ke keranjang");
-
-}
-
-</script>
-
-</body>
+</html></body>
 </html>

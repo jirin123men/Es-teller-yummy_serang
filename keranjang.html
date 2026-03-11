@@ -5,11 +5,7 @@
 
 <style>
 
-body{
-font-family:Arial;
-margin:0;
-background:#f3fff6;
-}
+body{font-family:Arial;margin:0;background:#f3fff6;}
 
 nav{
 background:#17a673;
@@ -38,6 +34,7 @@ border:none;
 padding:10px;
 border-radius:5px;
 cursor:pointer;
+margin-top:10px;
 }
 
 </style>
@@ -73,17 +70,21 @@ let list=document.getElementById("list");
 let html="";
 
 keranjang.forEach((item,i)=>{
-html += (i+1)+". "+item+"<br>";
+
+html += (i+1)+". "+item.nama+" x "+item.jumlah+"<br>";
+
 });
 
 list.innerHTML=html;
 
 function orderWA(){
 
-let pesan="Pesanan:%0A";
+let pesan="Pesanan Rokupang & Es Teler Yummy:%0A";
 
 keranjang.forEach((item,i)=>{
-pesan += (i+1)+". "+item+"%0A";
+
+pesan += (i+1)+". "+item.nama+" x "+item.jumlah+"%0A";
+
 });
 
 window.open("https://wa.me/6282217743964?text="+pesan);

@@ -59,9 +59,31 @@ color:white;
 .pesan{
 background:#17a673;
 color:white;
-padding:10px;
+padding:12px;
 margin-top:15px;
 width:100%;
+font-weight:bold;
+}
+
+.pembayaran{
+background:white;
+padding:15px;
+border-radius:10px;
+margin-top:20px;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
+.qris{
+width:200px;
+margin-top:10px;
+border-radius:10px;
+}
+
+.rek{
+background:#f5f5f5;
+padding:10px;
+border-radius:6px;
+margin-top:10px;
 }
 
 </style>
@@ -81,6 +103,29 @@ width:100%;
 <h2>Keranjang Pesanan</h2>
 
 <div id="list"></div>
+
+<!-- PEMBAYARAN -->
+
+<div class="pembayaran">
+
+<h3>Pembayaran</h3>
+
+<p><b>Transfer Bank BCA</b></p>
+
+<div class="rek">
+A/N Oky Priastomo <br>
+Bank BCA : <b>4920818060</b>
+</div>
+
+<p style="margin-top:15px;"><b>Bayar via QRIS</b></p>
+
+<img src="qris.jpg" class="qris">
+
+<p style="font-size:13px;color:gray;">
+Scan QRIS lalu kirim bukti pembayaran ke WhatsApp
+</p>
+
+</div>
 
 <button class="pesan" onclick="orderWA()">Pesan via WhatsApp</button>
 
@@ -140,6 +185,8 @@ keranjang.forEach((item,i)=>{
 pesan+=(i+1)+". "+item.nama+" x "+item.jumlah+"%0A";
 
 });
+
+pesan+="%0APembayaran: Transfer / QRIS";
 
 window.open("https://wa.me/6282217743964?text="+pesan);
 

@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<title>Menu Produk</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu - Esteler Yummy</title>
 
 <style>
 
-body{font-family:Arial;margin:0;background:#f3fff6;}
+body{
+font-family:Arial;
+margin:0;
+background:#f3fff6;
+}
 
 nav{
 background:#17a673;
@@ -29,32 +35,42 @@ padding:20px;
 
 .menu{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
 gap:15px;
 }
 
 .card{
 background:white;
-padding:15px;
-border-radius:8px;
+padding:20px;
+border-radius:10px;
 text-align:center;
-box-shadow:0 2px 5px rgba(0,0,0,0.1);
-}
-
-.qty{
-display:flex;
-justify-content:center;
-gap:10px;
-margin-top:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
 
 button{
 background:#17a673;
 color:white;
 border:none;
-padding:8px 12px;
-border-radius:5px;
+padding:10px 15px;
+border-radius:6px;
 cursor:pointer;
+margin-top:10px;
+}
+
+#toast{
+visibility:hidden;
+background:#17a673;
+color:white;
+padding:12px;
+border-radius:6px;
+position:fixed;
+bottom:30px;
+left:50%;
+transform:translateX(-50%);
+}
+
+#toast.show{
+visibility:visible;
 }
 
 </style>
@@ -77,33 +93,61 @@ cursor:pointer;
 
 <div class="card">
 <h3>Es Teler Yummy</h3>
-
-<div class="qty">
-<button onclick="tambah('Es Teler Yummy',1)">+ Tambah</button>
-</div>
-
+<button onclick="tambah('Es Teler Yummy')">+ Tambah</button>
 </div>
 
 <div class="card">
 <h3>Es Coklat</h3>
-
-<div class="qty">
-<button onclick="tambah('Es Coklat',1)">+ Tambah</button>
-</div>
-
+<button onclick="tambah('Es Coklat')">+ Tambah</button>
 </div>
 
 <div class="card">
 <h3>Rokupang</h3>
-
-<div class="qty">
-<button onclick="tambah('Rokupang',1)">+ Tambah</button>
+<button onclick="tambah('Rokupang')">+ Tambah</button>
 </div>
 
 </div>
 
 </div>
 
+<div id="toast">Produk ditambahkan ke keranjang</div>
+
+<script>
+
+function tambah(nama){
+
+let keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
+
+let index = keranjang.findIndex(p => p.nama === nama);
+
+if(index !== -1){
+keranjang[index].jumlah += 1;
+}else{
+keranjang.push({nama:nama,jumlah:1});
+}
+
+localStorage.setItem("keranjang",JSON.stringify(keranjang));
+
+showToast();
+
+}
+
+function showToast(){
+
+let toast=document.getElementById("toast");
+
+toast.className="show";
+
+setTimeout(function(){
+toast.className=toast.className.replace("show","");
+},2000);
+
+}
+
+</script>
+
+</body>
+</html>
 </div>
 
 <script>

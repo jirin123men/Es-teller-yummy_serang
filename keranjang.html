@@ -47,12 +47,48 @@ padding:20px;
 .item{
 background:white;
 padding:15px;
-border-radius:8px;
+border-radius:10px;
 margin-bottom:10px;
 box-shadow:0 2px 6px rgba(0,0,0,0.1);
 display:flex;
 justify-content:space-between;
 align-items:center;
+}
+
+.nama{
+font-weight:bold;
+}
+
+.harga{
+color:#17a673;
+}
+
+/* QTY */
+
+.qty button{
+background:#17a673;
+color:white;
+border:none;
+padding:6px 10px;
+border-radius:4px;
+cursor:pointer;
+}
+
+.qty span{
+margin:0 8px;
+font-weight:bold;
+}
+
+/* HAPUS */
+
+.hapus{
+background:red;
+color:white;
+border:none;
+padding:6px 10px;
+border-radius:4px;
+cursor:pointer;
+margin-left:10px;
 }
 
 /* TOTAL */
@@ -61,30 +97,6 @@ align-items:center;
 font-size:18px;
 font-weight:bold;
 margin-top:10px;
-}
-
-/* BUTTON */
-
-button{
-border:none;
-padding:8px 12px;
-border-radius:5px;
-cursor:pointer;
-}
-
-.hapus{
-background:red;
-color:white;
-}
-
-.pesan{
-background:#17a673;
-color:white;
-padding:14px;
-margin-top:20px;
-width:100%;
-font-weight:bold;
-font-size:16px;
 }
 
 /* PEMBAYARAN */
@@ -110,8 +122,19 @@ margin-top:10px;
 border-radius:10px;
 }
 
-.metode{
-margin-top:10px;
+/* PESAN */
+
+.pesan{
+background:#17a673;
+color:white;
+border:none;
+padding:15px;
+width:100%;
+margin-top:20px;
+font-size:16px;
+font-weight:bold;
+border-radius:6px;
+cursor:pointer;
 }
 
 </style>
@@ -138,19 +161,17 @@ margin-top:10px;
 
 <h3>Pilih Metode Pembayaran</h3>
 
-<div class="metode">
 <label>
 <input type="radio" name="bayar" value="Transfer BCA">
 Transfer Bank BCA
 </label>
-</div>
 
-<div class="metode">
+<br><br>
+
 <label>
 <input type="radio" name="bayar" value="QRIS">
 QRIS
 </label>
-</div>
 
 <p><b>Transfer Bank BCA</b></p>
 
@@ -159,11 +180,11 @@ A/N Oky Priastomo <br>
 Bank BCA : <b>4920818060</b>
 </div>
 
-<p style="margin-top:15px;"><b>Bayar via QRIS</b></p>
+<p style="margin-top:15px;"><b>QRIS</b></p>
 
 <img src="qris.jpg" class="qris">
 
-<p style="font-size:13px;color:gray">
+<p style="font-size:13px;color:gray;">
 Scan QRIS lalu kirim bukti pembayaran ke WhatsApp
 </p>
 
@@ -183,7 +204,7 @@ let totalBox = document.getElementById("total");
 function tampil(){
 
 if(keranjang.length==0){
-list.innerHTML="Keranjang kosong";
+list.innerHTML="<p>Keranjang kosong</p>";
 totalBox.innerHTML="";
 return;
 }
@@ -194,17 +215,32 @@ let total=0;
 keranjang.forEach((item,i)=>{
 
 let subtotal=item.harga*item.jumlah;
+
 total+=subtotal;
 
 html+=`
+
 <div class="item">
+
 <div>
-<b>${item.nama}</b><br>
-${item.jumlah} x Rp${item.harga.toLocaleString()}
+<div class="nama">${item.nama}</div>
+<div class="harga">Rp${item.harga.toLocaleString()}</div>
 </div>
 
+<div class="qty">
+
+<button onclick="kurang(${i})">-</button>
+
+<span>${item.jumlah}</span>
+
+<button onclick="tambah(${i})">+</button>
+
 <button class="hapus" onclick="hapus(${i})">Hapus</button>
+
 </div>
+
+</div>
+
 `;
 
 });
@@ -215,9 +251,39 @@ totalBox.innerHTML="Total: Rp "+total.toLocaleString();
 
 }
 
+function tambah(i){
+
+keranjang[i].jumlah++;
+
+simpan();
+
+}
+
+function kurang(i){
+
+if(keranjang[i].jumlah>1){
+
+keranjang[i].jumlah--;
+
+}else{
+
+keranjang.splice(i,1);
+
+}
+
+simpan();
+
+}
+
 function hapus(i){
 
 keranjang.splice(i,1);
+
+simpan();
+
+}
+
+function simpan(){
 
 localStorage.setItem("keranjang",JSON.stringify(keranjang));
 
@@ -254,8 +320,10 @@ pesan+=(i+1)+". "+item.nama+" x "+item.jumlah+" = Rp"+subtotal+"%0A";
 });
 
 pesan+="%0ATotal: Rp"+total;
+
 pesan+="%0AMetode Bayar: "+metode.value;
-pesan+="%0A%0AMohon konfirmasi pesanan.";
+
+pesan+="%0A%0AKirim bukti pembayaran setelah transfer.";
 
 window.open("https://wa.me/6282217743964?text="+pesan);
 

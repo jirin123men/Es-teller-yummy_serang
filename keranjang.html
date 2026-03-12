@@ -7,11 +7,17 @@
 
 <style>
 
+*{
+box-sizing:border-box;
+}
+
 body{
-font-family:Arial;
+font-family:Arial, Helvetica, sans-serif;
 margin:0;
 background:#f3fff6;
 }
+
+/* NAVBAR */
 
 nav{
 background:#17a673;
@@ -28,11 +34,15 @@ text-decoration:none;
 font-weight:bold;
 }
 
+/* CONTAINER */
+
 .container{
 max-width:900px;
 margin:auto;
 padding:20px;
 }
+
+/* ITEM */
 
 .item{
 background:white;
@@ -45,15 +55,19 @@ justify-content:space-between;
 align-items:center;
 }
 
+/* TOTAL */
+
 .total{
 font-size:18px;
 font-weight:bold;
 margin-top:10px;
 }
 
+/* BUTTON */
+
 button{
 border:none;
-padding:6px 10px;
+padding:8px 12px;
 border-radius:5px;
 cursor:pointer;
 }
@@ -73,18 +87,14 @@ font-weight:bold;
 font-size:16px;
 }
 
+/* PEMBAYARAN */
+
 .pembayaran{
 background:white;
-padding:15px;
+padding:20px;
 border-radius:10px;
 margin-top:20px;
 box-shadow:0 2px 6px rgba(0,0,0,0.1);
-}
-
-.qris{
-width:220px;
-margin-top:10px;
-border-radius:10px;
 }
 
 .rek{
@@ -92,6 +102,12 @@ background:#f5f5f5;
 padding:10px;
 border-radius:6px;
 margin-top:10px;
+}
+
+.qris{
+width:220px;
+margin-top:10px;
+border-radius:10px;
 }
 
 .metode{
@@ -118,21 +134,21 @@ margin-top:10px;
 
 <div class="total" id="total"></div>
 
-<!-- PEMBAYARAN -->
-
 <div class="pembayaran">
 
 <h3>Pilih Metode Pembayaran</h3>
 
 <div class="metode">
 <label>
-<input type="radio" name="bayar" value="Transfer BCA"> Transfer Bank BCA
+<input type="radio" name="bayar" value="Transfer BCA">
+Transfer Bank BCA
 </label>
 </div>
 
 <div class="metode">
 <label>
-<input type="radio" name="bayar" value="QRIS"> QRIS
+<input type="radio" name="bayar" value="QRIS">
+QRIS
 </label>
 </div>
 
@@ -147,7 +163,7 @@ Bank BCA : <b>4920818060</b>
 
 <img src="qris.jpg" class="qris">
 
-<p style="font-size:13px;color:gray;">
+<p style="font-size:13px;color:gray">
 Scan QRIS lalu kirim bukti pembayaran ke WhatsApp
 </p>
 
@@ -161,8 +177,8 @@ Scan QRIS lalu kirim bukti pembayaran ke WhatsApp
 
 let keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
 
-let list=document.getElementById("list");
-let totalBox=document.getElementById("total");
+let list = document.getElementById("list");
+let totalBox = document.getElementById("total");
 
 function tampil(){
 
@@ -186,9 +202,8 @@ html+=`
 <b>${item.nama}</b><br>
 ${item.jumlah} x Rp${item.harga.toLocaleString()}
 </div>
-<div>
+
 <button class="hapus" onclick="hapus(${i})">Hapus</button>
-</div>
 </div>
 `;
 
@@ -239,101 +254,8 @@ pesan+=(i+1)+". "+item.nama+" x "+item.jumlah+" = Rp"+subtotal+"%0A";
 });
 
 pesan+="%0ATotal: Rp"+total;
-
 pesan+="%0AMetode Bayar: "+metode.value;
-
 pesan+="%0A%0AMohon konfirmasi pesanan.";
-
-window.open("https://wa.me/6282217743964?text="+pesan);
-
-}
-
-tampil();
-
-</script>
-
-</body>
-</html><div class="pembayaran">
-
-<h3>Pembayaran</h3>
-
-<p><b>Transfer Bank BCA</b></p>
-
-<div class="rek">
-A/N Oky Priastomo <br>
-Bank BCA : <b>4920818060</b>
-</div>
-
-<p style="margin-top:15px;"><b>Bayar via QRIS</b></p>
-
-<img src="qris.jpg" class="qris">
-
-<p style="font-size:13px;color:gray;">
-Scan QRIS lalu kirim bukti pembayaran ke WhatsApp
-</p>
-
-</div>
-
-<button class="pesan" onclick="orderWA()">Pesan via WhatsApp</button>
-
-</div>
-
-<script>
-
-let keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
-
-let list=document.getElementById("list");
-
-function tampil(){
-
-if(keranjang.length==0){
-list.innerHTML="Keranjang kosong";
-return;
-}
-
-let html="";
-
-keranjang.forEach((item,i)=>{
-
-html+=`
-<div class="item">
-<span>${item.nama} x ${item.jumlah}</span>
-<button class="hapus" onclick="hapus(${i})">Hapus</button>
-</div>
-`;
-
-});
-
-list.innerHTML=html;
-
-}
-
-function hapus(i){
-
-keranjang.splice(i,1);
-
-localStorage.setItem("keranjang",JSON.stringify(keranjang));
-
-tampil();
-
-}
-
-function orderWA(){
-
-if(keranjang.length==0){
-alert("Keranjang kosong");
-return;
-}
-
-let pesan="Pesanan Rokupang & Es Teler Yummy:%0A";
-
-keranjang.forEach((item,i)=>{
-
-pesan+=(i+1)+". "+item.nama+" x "+item.jumlah+"%0A";
-
-});
-
-pesan+="%0APembayaran: Transfer / QRIS";
 
 window.open("https://wa.me/6282217743964?text="+pesan);
 

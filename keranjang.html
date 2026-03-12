@@ -84,6 +84,12 @@ input[type="text"]{
     border-radius:6px;
     border:1px solid #ccc;
 }
+#error-alamat{
+    color:red;
+    font-size:13px;
+    display:none;
+    margin-top:5px;
+}
 </style>
 </head>
 <body>
@@ -101,6 +107,7 @@ input[type="text"]{
     <!-- Alamat Pengiriman -->
     <label for="alamat">Alamat Pengiriman:</label>
     <input type="text" id="alamat" placeholder="Masukkan alamat lengkap">
+    <p id="error-alamat">Alamat wajib diisi!</p>
 
     <!-- PEMBAYARAN -->
     <div class="pembayaran">
@@ -123,6 +130,7 @@ input[type="text"]{
 <script>
 let keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
 let list = document.getElementById("list");
+let errorAlamat = document.getElementById("error-alamat");
 
 function tampil(){
     if(keranjang.length == 0){
@@ -147,14 +155,16 @@ function hapus(i){
 }
 
 function orderWA(){
-    if(keranjang.length == 0){
-        alert("Keranjang kosong");
-        return;
-    }
-
     let alamat = document.getElementById("alamat").value.trim();
     if(!alamat){
-        alert("Alamat pengiriman wajib diisi!");
+        errorAlamat.style.display = "block"; // tampilkan error inline
+        return;
+    } else {
+        errorAlamat.style.display = "none"; // sembunyikan error kalau sudah diisi
+    }
+
+    if(keranjang.length == 0){
+        alert("Keranjang kosong");
         return;
     }
 

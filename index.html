@@ -69,6 +69,7 @@ section{
     object-fit:cover;
     border-radius:8px;
 }
+/* BUTTON */
 button{
     background:#17a673;
     color:white;
@@ -122,9 +123,7 @@ Es Teler adalah minuman khas Indonesia yang terbuat dari campuran alpukat, kelap
 Rasanya manis, segar, dan sangat cocok diminum saat cuaca panas.
 Di Esteler Yummy kami menyajikan Es Teler dengan bahan segar dan rasa yang nikmat.
 </p>
-<a href="menu.html">
-<button>Lihat Menu</button>
-</a>
+<a href="menu.html"><button>Lihat Menu</button></a>
 </section>
 
 <section>
@@ -149,19 +148,9 @@ Di Esteler Yummy kami menyajikan Es Teler dengan bahan segar dan rasa yang nikma
 </section>
 
 <section>
-<h2>Pemesanan</h2>
-<p>Pesan sekarang lewat platform favoritmu. Cepat, mudah, dan aman!</p>
-<div class="pesan-btns">
-<a href="https://shopee.co.id/universal-link/now-food/shop/21634673?deep_and_deferred=1&shareChannel=copy_link" target="_blank">
-<button class="shopee">Pesan via Shopee</button>
-</a>
-<a href="https://gofood.link/a/AxvvhUd" target="_blank">
-<button class="gofood">Pesan via GoFood</button>
-</a>
-<button style="background:#17a673;" onclick="pesanWA()">Pesan via WhatsApp</button>
-</div>
+<h2>Pemesanan via WhatsApp</h2>
+<p>Isi form di bawah dan klik tombol untuk mengirim pesan otomatis ke WhatsApp:</p>
 
-<!-- Form Chat WA -->
 <div style="margin-top:15px; max-width:400px; margin-left:auto; margin-right:auto;">
 <label>Nama:</label>
 <input type="text" id="nama" placeholder="Masukkan nama lengkap" style="width:100%; padding:8px; margin-bottom:10px;">
@@ -171,6 +160,7 @@ Di Esteler Yummy kami menyajikan Es Teler dengan bahan segar dan rasa yang nikma
 <input type="text" id="alamat" placeholder="Alamat lengkap" style="width:100%; padding:8px; margin-bottom:10px;">
 <label>Request:</label>
 <input type="text" id="request" placeholder="Permintaan khusus (opsional)" style="width:100%; padding:8px; margin-bottom:10px;">
+<button style="background:#17a673; width:100%; font-size:16px;" onclick="pesanWA()">Kirim Pesan ke WhatsApp</button>
 </div>
 </section>
 
@@ -180,19 +170,23 @@ WhatsApp Order : 082217743964
 
 <script>
 function pesanWA(){
-    let nama = document.getElementById("nama").value.trim();
-    let pesanan = document.getElementById("pesanan").value.trim();
-    let alamat = document.getElementById("alamat").value.trim();
-    let request = document.getElementById("request").value.trim();
+    const nama = document.getElementById("nama").value.trim();
+    const pesanan = document.getElementById("pesanan").value.trim();
+    const alamat = document.getElementById("alamat").value.trim();
+    const request = document.getElementById("request").value.trim();
 
     if(!nama || !pesanan || !alamat){
         alert("Nama, Pesanan, dan Alamat wajib diisi!");
         return;
     }
 
-    let pesan = `Assalamualaikum%0ANama: ${encodeURIComponent(nama)}%0APesanan: ${encodeURIComponent(pesanan)}%0AAlamat: ${encodeURIComponent(alamat)}%0ARequest: ${encodeURIComponent(request)}%0ATerima kasih`;
+    // Format pesan profesional, rapi, setiap item di baris baru
+    const pesan = `Assalamualaikum\n\nNama: ${nama}\nPesanan: ${pesanan}\nAlamat: ${alamat}\nRequest: ${request || '-'}\n\nTerima kasih`;
 
-    window.open(`https://wa.me/6282217743964?text=${pesan}`, "_blank");
+    // Encode untuk URL WhatsApp
+    const encodedPesan = encodeURIComponent(pesan);
+
+    window.open(`https://wa.me/6282217743964?text=${encodedPesan}`, "_blank");
 }
 </script>
 

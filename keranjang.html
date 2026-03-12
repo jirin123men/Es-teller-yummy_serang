@@ -252,23 +252,16 @@ totalBox.innerHTML="Total: Rp "+total.toLocaleString();
 }
 
 function tambah(i){
-
 keranjang[i].jumlah++;
-
 simpan();
-
 }
 
 function kurang(i){
 
 if(keranjang[i].jumlah>1){
-
 keranjang[i].jumlah--;
-
 }else{
-
 keranjang.splice(i,1);
-
 }
 
 simpan();
@@ -276,11 +269,8 @@ simpan();
 }
 
 function hapus(i){
-
 keranjang.splice(i,1);
-
 simpan();
-
 }
 
 function simpan(){
@@ -320,9 +310,7 @@ pesan+=(i+1)+". "+item.nama+" x "+item.jumlah+" = Rp"+subtotal+"%0A";
 });
 
 pesan+="%0ATotal: Rp"+total;
-
 pesan+="%0AMetode Bayar: "+metode.value;
-
 pesan+="%0A%0AKirim bukti pembayaran setelah transfer.";
 
 window.open("https://wa.me/6282217743964?text="+pesan);

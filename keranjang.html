@@ -158,20 +158,21 @@ function orderWA(){
         return;
     }
 
-    let pesan = "Pesanan Rokupang & Es Teler Yummy:%0A";
+    let pesan = "Pesanan Rokupang & Es Teler Yummy:\n";
     let total = 0;
 
     keranjang.forEach((item,i)=>{
         let subtotal = item.harga * item.jumlah;
         total += subtotal;
-        pesan += `${i+1}. ${item.nama} x ${item.jumlah} = Rp${subtotal.toLocaleString()}%0A`;
+        pesan += `${i+1}. ${item.nama} x ${item.jumlah} = Rp${subtotal.toLocaleString()}\n`;
     });
 
-    pesan += `%0ATotal: Rp${total.toLocaleString()}%0A`;
-    pesan += `Alamat Pengiriman: ${alamat}%0A`;
+    pesan += `\nTotal: Rp${total.toLocaleString()}\n`;
+    pesan += `Alamat Pengiriman: ${alamat}\n`;
     pesan += `Pembayaran: Transfer / QRIS`;
 
-    window.open("https://wa.me/6282217743964?text=" + pesan);
+    let waLink = "https://wa.me/6282217743964?text=" + encodeURIComponent(pesan);
+    window.open(waLink);
 }
 
 tampil();

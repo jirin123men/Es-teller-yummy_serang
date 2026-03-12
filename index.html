@@ -100,6 +100,27 @@ button{
 }
 .shopee{background:#ff5722;}
 .gofood{background:#00c853;}
+/* FORM WA */
+.wa-form input{
+    width:100%;
+    padding:8px;
+    margin-bottom:10px;
+    border-radius:5px;
+    border:1px solid #ccc;
+    box-sizing:border-box;
+}
+.wa-form button{
+    width:100%;
+    font-size:16px;
+}
+footer{
+    background:#17a673;
+    color:white;
+    text-align:center;
+    padding:15px;
+    margin-top:30px;
+    font-weight:bold;
+}
 </style>
 </head>
 <body>
@@ -148,24 +169,29 @@ Di Esteler Yummy kami menyajikan Es Teler dengan bahan segar dan rasa yang nikma
 </section>
 
 <section>
-<h2>Pemesanan via WhatsApp</h2>
-<p>Isi form di bawah dan klik tombol untuk mengirim pesan otomatis ke WhatsApp:</p>
+<h2>Pemesanan</h2>
+<p>Pesan sekarang lewat platform favoritmu:</p>
+<div class="pesan-btns">
+<a href="https://shopee.co.id/universal-link/now-food/shop/21634673?deep_and_deferred=1&shareChannel=copy_link" target="_blank">
+<button class="shopee">Pesan via Shopee</button>
+</a>
+<a href="https://gofood.link/a/AxvvhUd" target="_blank">
+<button class="gofood">Pesan via GoFood</button>
+</a>
+</div>
 
-<div style="margin-top:15px; max-width:400px; margin-left:auto; margin-right:auto;">
-<label>Nama:</label>
-<input type="text" id="nama" placeholder="Masukkan nama lengkap" style="width:100%; padding:8px; margin-bottom:10px;">
-<label>Pesanan:</label>
-<input type="text" id="pesanan" placeholder="Nama produk & jumlah" style="width:100%; padding:8px; margin-bottom:10px;">
-<label>Alamat:</label>
-<input type="text" id="alamat" placeholder="Alamat lengkap" style="width:100%; padding:8px; margin-bottom:10px;">
-<label>Request:</label>
-<input type="text" id="request" placeholder="Permintaan khusus (opsional)" style="width:100%; padding:8px; margin-bottom:10px;">
-<button style="background:#17a673; width:100%; font-size:16px;" onclick="pesanWA()">Kirim Pesan ke WhatsApp</button>
+<h3>Atau langsung via WhatsApp:</h3>
+<div class="wa-form" style="max-width:400px; margin:auto;">
+<input type="text" id="nama" placeholder="Nama lengkap">
+<input type="text" id="pesanan" placeholder="Nama produk & jumlah">
+<input type="text" id="alamat" placeholder="Alamat lengkap">
+<input type="text" id="request" placeholder="Request khusus (opsional)">
+<button style="background:#17a673;" onclick="pesanWA()">Kirim Pesan ke WhatsApp</button>
 </div>
 </section>
 
 <footer>
-WhatsApp Order : 082217743964
+WhatsApp Order: <a href="https://wa.me/6282217743964" style="color:white; text-decoration:none;">082217743964</a>
 </footer>
 
 <script>
@@ -180,10 +206,7 @@ function pesanWA(){
         return;
     }
 
-    // Format pesan profesional, rapi, setiap item di baris baru
     const pesan = `Assalamualaikum\n\nNama: ${nama}\nPesanan: ${pesanan}\nAlamat: ${alamat}\nRequest: ${request || '-'}\n\nTerima kasih`;
-
-    // Encode untuk URL WhatsApp
     const encodedPesan = encodeURIComponent(pesan);
 
     window.open(`https://wa.me/6282217743964?text=${encodedPesan}`, "_blank");
